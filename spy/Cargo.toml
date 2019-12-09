@@ -1,0 +1,17 @@
+[package]
+name = "spy"
+version = "0.1.0"
+authors = ["taoyu <1255803549@qq.com>"]
+edition = "2018"
+
+[lib]
+name = "spy"
+path = "lib.rs"
+
+[[example]]
+name = "capture"
+path = "examples/capture.rs"
+
+[build-dependencies]
+bindgen = "0.52"
+cc = "1.0"

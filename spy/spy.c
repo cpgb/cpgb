@@ -22,6 +22,10 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
     return TRUE;
 }
 
+static BOOL Spy(HWND hWnd) {
+    
+}
+
 /**
  * 窗口回调函数
  *
@@ -37,16 +41,13 @@ LRESULT CALLBACK CallWndProc(int code, WPARAM wParam, LPARAM lParam)
         if (cs->hwnd == G_DST_HWND && cs->message == WM_NULL &&
             cs->wParam == 0x19820820 && cs->lParam == 0x19831014)
         {
-            //boost::shared_ptr<std::string> str(new std::string);
-            std::string str;
-            g_bOK = DoSpyIt(G_DST_HWND, str);
-            if (g_bOK)
+            BOOL ok = Spy(G_DST_HWND);
+            if (ok)
             {
-                strncpy_s(g_hwndinfo, NUM_WNDINFO, str.c_str(), sizeof(g_hwndinfo) - 1);
-                g_hwndinfo[sizeof(g_hwndinfo) - 1] = 0;
+                // strncpy_s(g_hwndinfo, NUM_WNDINFO, str.c_str(), sizeof(g_hwndinfo) - 1);
+                // g_hwndinfo[sizeof(g_hwndinfo) - 1] = 0;
             }
-            return g_bOK;
-            //return CallNextHookEx(g_hk,code,wParam,lParam);
+            return ok;
         }
     }
     return CallNextHookEx(G_HK, code, wParam, lParam);
