@@ -1,0 +1,3 @@
+[submodule "deno"]
+	path = ts-runtime/deno
+	url = https://github.com/denoland/deno.git
